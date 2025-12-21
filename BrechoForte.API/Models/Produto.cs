@@ -26,5 +26,8 @@ namespace BrechoForte.API.Models
         public bool EstaVendido { get; set; } = false;
 
         public DateTime DataCadastro { get; set; } = DateTime.Now;
+
+        public string? FotoUrl { get; set; }
+        
     }
 }

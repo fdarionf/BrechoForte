@@ -16,5 +16,6 @@ namespace BrechoForte.API.DTOs
 
         [Required]
         public decimal Preco { get; set; }
+        public string? FotoUrl { get; set; }
     }
 }

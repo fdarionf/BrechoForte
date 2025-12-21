@@ -9,5 +9,6 @@
         public string Tamanho { get; set; }
         public decimal Preco { get; set; }
         public bool EstaVendido { get; set; }
+        public string? FotoUrl { get; set; }
     }
 }

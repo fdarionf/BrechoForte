@@ -32,7 +32,8 @@ namespace BrechoForte.API.Controllers
                 Descricao = p.Descricao,
                 Preco = p.Preco,
                 Tamanho = p.Tamanho,
-                EstaVendido = p.EstaVendido
+                EstaVendido = p.EstaVendido,
+                FotoUrl = p.FotoUrl
             }).ToList();
 
             return Ok(resposta);
@@ -58,8 +59,9 @@ namespace BrechoForte.API.Controllers
                 Descricao = produto.Descricao,
                 Preco = produto.Preco,
                 Tamanho = produto.Tamanho,
-                EstaVendido = produto.EstaVendido
-            };file:///C:/Program%20Files%20(x86)/Steam/steamapps/workshop/content/431960/2779973499/preview.gif
+                EstaVendido = produto.EstaVendido,
+                FotoUrl = produto.FotoUrl
+            };
 
             return Ok(resposta);
         }
@@ -76,7 +78,8 @@ namespace BrechoForte.API.Controllers
                 Descricao = request.Descricao,
                 Preco = request.Preco,
                 Tamanho = request.Tamanho,
-                EstaVendido = request.EstaVendido
+                EstaVendido = request.EstaVendido,
+                FotoUrl = request.FotoUrl
             };
 
             try
@@ -92,7 +95,8 @@ namespace BrechoForte.API.Controllers
                     Descricao = produtoAtualizado.Descricao,
                     Preco = produtoAtualizado.Preco,
                     Tamanho = produtoAtualizado.Tamanho,
-                    EstaVendido = produtoAtualizado.EstaVendido
+                    EstaVendido = produtoAtualizado.EstaVendido,
+                    FotoUrl = produtoAtualizado.FotoUrl
                 };
 
                 return Ok(resposta);
@@ -132,6 +136,7 @@ namespace BrechoForte.API.Controllers
                 Descricao = request.Descricao,
                 Preco = request.Preco,
                 Tamanho = request.Tamanho,
+                FotoUrl = request.FotoUrl,
                 EstaVendido = false // Padrão
             };
 

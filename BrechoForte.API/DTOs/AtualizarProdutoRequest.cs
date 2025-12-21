@@ -18,5 +18,7 @@ namespace BrechoForte.API.DTOs
 
         // Na atualização, permitimos corrigir se está vendido ou não
         public bool EstaVendido { get; set; }
+
+        public string? FotoUrl { get; set; }
     }
 }

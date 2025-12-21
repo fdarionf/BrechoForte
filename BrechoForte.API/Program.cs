@@ -22,6 +22,17 @@ builder.Services.AddDbContext<BrechoContext>(options =>
 // Configuração da Injeção de Dependência do Repositório
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 
+// 1. Configurar o CORS (Permitir que qualquer site acesse nossa API por enquanto)
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirTudo", policy =>
+    {
+        policy.AllowAnyOrigin()  // Aceita pedidos de qualquer lugar
+              .AllowAnyMethod()  // Aceita GET, POST, DELETE...
+              .AllowAnyHeader(); // Aceita qualquer cabeçalho
+    });
+});
+
 var app = builder.Build();
 
 // Configura o pipeline de requisições HTTP.
@@ -32,6 +43,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// 2. Ativar a porteira que criamos acima
+app.UseCors("PermitirTudo");
 
 app.UseAuthorization();
 
