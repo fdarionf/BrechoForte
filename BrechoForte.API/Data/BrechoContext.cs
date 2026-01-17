@@ -18,5 +18,7 @@ namespace BrechoForte.API.Data
         // Aqui dizemos: "O meu banco deve ter uma tabela de Produtos".
         // DbSet = Representação da Tabela.
         public DbSet<Produto> Produtos { get; set; }
+
+        public DbSet<Configuracao> Configuracoes { get; set; }
     }
 }

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciador</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <div class="main-container">
+        <h1>🔐 Área Restrita</h1>
+
+        <div id="tela-login" class="card-login">
+            <p>Digite a senha de administrador:</p>
+            <input type="password" id="campo-senha" placeholder="Senha...">
+            <button onclick="tentarLogin()">Entrar</button>
+            <p id="msg-erro" class="erro"></p>
+        </div>
+
+        <div id="painel-admin" class="card-admin hidden">
+
+            <div class="cabecalho-painel">
+                <h2>Painel de Controle</h2>
+                <button onclick="sair()" class="btn-sair">Sair</button>
+            </div>
+
+            <div style="background-color: #f1f8e9; padding: 15px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #c5e1a5;">
+                <h3 style="margin-top:0; color: #33691e;">⚙️ Configuração da Loja</h3>
+
+                <div style="margin-bottom: 10px;">
+                    <label style="display:block; font-weight:bold; margin-bottom:5px;">Nome da Loja (Título):</label>
+                    <input type="text" id="novo-nome-loja" placeholder="Ex: Brechó Vida Longa" style="width: 100%; padding: 8px; box-sizing: border-box;">
+                </div>
+
+                <div style="margin-bottom: 10px;">
+                    <label style="display:block; font-weight:bold; margin-bottom:5px;">WhatsApp (somente números):</label>
+                    <input type="text" id="novo-whatsapp" placeholder="Ex: 5551999999999" style="width: 100%; padding: 8px; box-sizing: border-box;">
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display:block; font-weight:bold; margin-bottom:5px;">Nova Senha (deixe em branco para manter a atual):</label>
+                    <input type="password" id="nova-senha" placeholder="Digite a nova senha aqui..." style="width: 100%; padding: 8px; box-sizing: border-box;">
+                </div>
+
+                <button onclick="salvarConfiguracoes()" style="width: 100%; background-color: #0288d1; color: white; padding: 10px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+                    💾 Salvar Todas as Configurações
+                </button>
+            </div>
+
+            <hr>
+
+            <h3>👕 Gerenciar Produtos</h3>
+
+            <div class="form-grid">
+                <div class="campo">
+                    <label>Nome do Produto</label>
+                    <input type="text" id="nome" placeholder="Ex: Vestido de Festa">
+                </div>
+
+                <div class="campo">
+                    <label>Preço (R$)</label>
+                    <input type="number" id="preco" step="0.10" placeholder="0,00">
+                </div>
+
+                <div class="campo">
+                    <label>Tamanho</label>
+                    <input type="text" id="tamanho" placeholder="Ex: M, G, 38, 42...">
+                </div>
+
+                <div class="campo full-width">
+                    <label>Descrição</label>
+                    <textarea id="descricao" rows="3" placeholder="Detalhes da peça..."></textarea>
+                </div>
+
+                <div class="campo full-width">
+                    <label>Link da Foto (URL)</label>
+                    <input type="text" id="fotoUrl" placeholder="https://...">
+                    <small>Dica: Copie o endereço da imagem do Google Imagens</small>
+                </div>
+            </div>
+
+            <button onclick="salvarProduto()" class="btn-salvar">💾 Cadastrar Produto</button>
+            <button onclick="limparFormulario()" style="background: #757575; color: white; margin-left: 10px; padding: 12px 20px;">Cancelar / Limpar</button>
+
+            <div class="lista-gerenciamento" style="margin-top: 40px;">
+                <h3>📦 Lista de Estoque</h3>
+                <table width="100%" style="border-collapse: collapse; margin-top: 15px;">
+                    <thead>
+                        <tr style="background: #f0f0f0; text-align: left;">
+                            <th style="padding: 10px;">Foto</th>
+                            <th style="padding: 10px;">Nome</th>
+                            <th style="padding: 10px;">Preço</th>
+                            <th style="padding: 10px; text-align: right;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-produtos">
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+            <a href="index.html" target="_blank" class="link-loja">Ver a Loja (Vitrine) ↗</a>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
