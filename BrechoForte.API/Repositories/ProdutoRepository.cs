@@ -56,6 +56,7 @@ namespace BrechoForte.API.Repositories
             produtoPorId.Preco = produto.Preco;
             produtoPorId.Tamanho = produto.Tamanho;
             produtoPorId.EstaVendido = produto.EstaVendido;
+            produtoPorId.FotoUrl = produto.FotoUrl;
 
             // Salvamos as alterações (UPDATE Produtos SET...)
             _context.Produtos.Update(produtoPorId);
