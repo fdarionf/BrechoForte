@@ -57,6 +57,9 @@ async function carregarConfigAdmin() {
         if (config.whatsapp) {
             document.getElementById('novo-whatsapp').value = config.whatsapp;
         }
+
+        document.getElementById('novo-email').value = config.emailContato || "";
+
     } catch (e) { console.error("Erro ao buscar config", e); }
 }
 
@@ -65,12 +68,14 @@ async function salvarConfiguracoes() {
     const novoNome = document.getElementById('novo-nome-loja').value;
     const novoWhats = document.getElementById('novo-whatsapp').value;
     const novaSenha = document.getElementById('nova-senha').value;
+    const novoEmail = document.getElementById('novo-email').value;
 
     if (!novoNome) { alert("O nome da loja é obrigatório!"); return; }
 
     const dadosAtualizados = {
         nomeLoja: novoNome,
         whatsapp: novoWhats,
+        emailContato: novoEmail,
         senhaAdmin: novaSenha // Se estiver vazio, o Backend ignora. Se tiver texto, ele troca.
     };
 

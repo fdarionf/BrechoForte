@@ -98,3 +98,52 @@ button {
     color: #555;
     text-decoration: none;
 }
+
+/* --- RESPONSIVIDADE DO ADMIN (Mobile) --- */
+@media (max-width: 768px) {
+
+    /* 1. Aproveita a tela toda */
+    .main-container {
+        width: 95%; /* Quase encosta na borda */
+        margin: 20px auto;
+        padding: 10px;
+    }
+
+    /* 2. O Formulário vira uma fila única (Empilha tudo) */
+    .form-grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Garante que os inputs ocupem 100% da largura */
+    .campo, .campo input, .campo textarea {
+        width: 100%;
+    }
+
+    /* 3. A Solução da Tabela (O Pulo do Gato) */
+    /* Cria uma "janela" com rolagem se a tabela for grande */
+    .lista-gerenciamento {
+        overflow-x: auto; /* Permite rolar para o lado */
+        background: white;
+        border: 1px solid #ddd; /* Borda para indicar que é uma caixa */
+        border-radius: 4px;
+    }
+
+    table {
+        /* Força a tabela a ter um tamanho mínimo decente */
+        /* Assim ela não espreme o texto, e o usuário rola pra ver */
+        min-width: 600px;
+    }
+
+    /* 4. Ajustes nos Botões para dedos gordinhos */
+    button {
+        padding: 15px !important; /* Mais fácil de clicar */
+        margin-bottom: 5px;
+    }
+
+    /* Ajuste específico para os botões de ação da tabela não colarem */
+    td button {
+        padding: 8px 12px !important;
+        margin: 2px;
+    }
+}

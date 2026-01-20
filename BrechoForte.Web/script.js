@@ -1,30 +1,47 @@
 // script.js
 
 // CONFIGURAÇÃO:
-const PORTA_API = 7134; // <--- Confira se a porta é essa mesma
+const PORTA_API = 7134;
 const URL_BASE = `https://localhost:${PORTA_API}/api`;
 const URL_API = `${URL_BASE}/Produto`;
 
-// Variável Global para o WhatsApp (Começa com um padrão, mas vai mudar)
+// Variável Global para o WhatsApp
 let whatsappLoja = "5551999999999";
 
-// 1. Carrega Nome da Loja e WhatsApp do Banco de Dados
+// 1. Carrega Nome da Loja, WhatsApp e AGORA O EMAIL do Banco de Dados
 async function carregarConfiguracao() {
     try {
         const resposta = await fetch(`${URL_BASE}/Configuracao`);
         if (resposta.ok) {
             const config = await resposta.json();
 
-            // Atualiza o Título na página (h1)
+            // --- ATUALIZAÇÃO DO HEADER (Já existia) ---
             const titulo = document.getElementById('titulo-loja');
             if (titulo) titulo.innerText = config.nomeLoja;
 
-            // Atualiza o nome na aba do navegador
             document.title = config.nomeLoja;
 
-            // Atualiza o WhatsApp da variável global
             if (config.whatsapp) {
                 whatsappLoja = config.whatsapp;
+            }
+
+            // --- ATUALIZAÇÃO DO FOOTER (Novo) ---
+
+            // 1. Atualiza o nome da loja nos direitos autorais
+            const nomeFooter = document.getElementById('nome-loja-footer');
+            if (nomeFooter) {
+                nomeFooter.innerText = config.nomeLoja;
+            }
+
+            // 2. Atualiza o E-mail de Contato
+            // IMPORTANTE: Seu C# precisa retornar a propriedade 'email' no JSON para isso funcionar 100%
+            const emailFooter = document.getElementById('link-email-footer');
+            if (emailFooter) {
+                // Se a API trouxe email, usa ele. Se não, usa um padrão ou avisa.
+                const emailParaExibir = config.emailContato || "email@padrao.com.br";
+
+                emailFooter.innerText = "✉ " + emailParaExibir;
+                emailFooter.href = "mailto:" + emailParaExibir;
             }
         }
     } catch (erro) {
@@ -32,7 +49,7 @@ async function carregarConfiguracao() {
     }
 }
 
-// 2. Carrega os Produtos
+// 2. Carrega os Produtos (Mantido idêntico ao seu original)
 async function carregarProdutos() {
     try {
         console.log("1. Buscando produtos...");
@@ -56,8 +73,6 @@ async function carregarProdutos() {
         produtos.forEach(produto => {
             const imagem = produto.fotoUrl ? produto.fotoUrl : 'https://via.placeholder.com/250?text=Sem+Foto';
 
-            // AQUI ESTÁ A MÁGICA:
-            // Usamos ${whatsappLoja} no link em vez do número fixo
             const cartaoHTML = `
                 <div class="card">
                     <img src="${imagem}" alt="${produto.nome}">
@@ -65,7 +80,7 @@ async function carregarProdutos() {
                     <p style="font-weight: bold; color: #555;">Tamanho: ${produto.tamanho}</p>
                     <p>${produto.descricao || ''}</p>
                     <p class="preco">R$ ${produto.preco.toFixed(2)}</p>
-                    
+                     
                     <a href="https://wa.me/${whatsappLoja}?text=Olá! Tenho interesse no item: ${produto.nome} (Tam: ${produto.tamanho})" 
                        class="btn-whats" target="_blank">
                         🛒 Comprar no Zap
@@ -87,7 +102,5 @@ async function carregarProdutos() {
 }
 
 // Ordem de execução:
-// 1. Carrega a configuração (Nome e Whats)
 carregarConfiguracao();
-// 2. Carrega os produtos
 carregarProdutos();
